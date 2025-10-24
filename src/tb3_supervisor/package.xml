@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>tb3_supervisor</name>
+  <version>0.1.0</version>
+  <description>Navigation2 + TurtleBot3 Gazebo with safety supervisor.</description>
+  <maintainer email="shrikrishnarb@gmail.com">Shrikrishna</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+
+  <!-- For including other launch files -->
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>turtlebot3_gazebo</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
