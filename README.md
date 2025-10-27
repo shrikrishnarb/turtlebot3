@@ -12,6 +12,14 @@ A safety supervisor for TurtleBot3 that intercepts `/cmd_vel` from Nav2, enforce
 
 ---
 
+## Background & Design Concept
+- Traditional Nav2 navigation can get stuck when obstacles remain close for extended periods.
+- This project introduces a lightweight supervisory layer that intercepts velocity commands and dynamically enforces slow/stop behavior, ensuring safety and smooth recovery.
+- The design emphasizes determinism (predictable unblocking sequence) and simplicity, requiring only /scan and /cmd_vel_raw.
+- The goal is to create a more robust and product-ready navigation behavior suitable for autonomous indoor robots.
+
+---
+
 ## Prerequisites
 - **OS / ROS 2**: Ubuntu 22.04, ROS 2 Humble.
 - Install required packages:
@@ -69,6 +77,12 @@ ros2 action send_goal /navigate_to_pose nav2_msgs/action/NavigateToPose \
 ```
  
  ---
+
+## AI Usage
+AI was used for documentation refinement and to generate boilerplate launch file structure.  
+All logic, design, and debugging were performed manually.
+
+---
 
  ## License
 Apache-2.0. Please retain attribution and document changes if you redistribute.
