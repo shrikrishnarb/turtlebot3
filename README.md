@@ -20,6 +20,26 @@ A safety supervisor for TurtleBot3 that intercepts `/cmd_vel` from Nav2, enforce
 
 ---
 
+## Program Structure
+
+```
+turtlebot3/
+├── src/                         # ROS 2 workspace
+│   ├── tb3_supervisor/           # Supervisor package for TurtleBot3
+│   │   ├── config/               # Parameter and configuration files
+│   │   ├── launch/               # Launch files for SLAM, Nav2, and supervisor
+│   │   ├── maps/                 # Saved maps (YAML + PGM files)
+│   │   ├── resource/             # Package resource files
+│   │   ├── tb3_supervisor/       # Python module directory
+│   │   │   └── supervisor_node.py  # Main safety supervisor node
+│   │   ├── package.xml           # ROS 2 package manifest
+│   │   └── setup.py              # Python package setup script
+└── README.md                     # Project documentation
+```
+
+
+---
+
 ## Prerequisites
 - **OS / ROS 2**: Ubuntu 22.04, ROS 2 Humble.
 - Install required packages:
