@@ -34,6 +34,7 @@ turtlebot3/
 │   │   │   └── supervisor_node.py  # Main safety supervisor node
 │   │   ├── package.xml           # ROS 2 package manifest
 │   │   └── setup.py              # Python package setup script
+│   ├── media/                    # Simulation videos, screenshots, etc.
 └── README.md                     # Project documentation
 ```
 
