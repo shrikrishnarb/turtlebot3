@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Bring up: Gazebo world + Nav2 (supervised) + RViz. Map is optional.
+
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, TimerAction, OpaqueFunction, LogInfo
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -11,8 +13,7 @@ def generate_launch_description():
     pkg = get_package_share_directory('tb3_supervisor')
 
     use_sim_time = DeclareLaunchArgument('use_sim_time', default_value='True')
-    map_arg      = DeclareLaunchArgument('map', default_value='')
-
+    map_arg = DeclareLaunchArgument('map', default_value='')
     x_pose = DeclareLaunchArgument('x_pose', default_value='-2.0')
     y_pose = DeclareLaunchArgument('y_pose', default_value='-0.5')
     z_pose = DeclareLaunchArgument('z_pose', default_value='0.0')
@@ -30,6 +31,7 @@ def generate_launch_description():
         arguments=['-d', rviz_config]
     )
 
+    # Decide at runtime whether to pass a map to Nav2 (works with/without a map file)
     def _include_nav2_with_valid_map(context, *args, **kwargs):
         map_path = LaunchConfiguration('map').perform(context)
         actions = []
@@ -50,6 +52,7 @@ def generate_launch_description():
     return LaunchDescription([
         use_sim_time, map_arg,
         x_pose, y_pose, z_pose,
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(sim_launch),
             launch_arguments={
@@ -59,8 +62,10 @@ def generate_launch_description():
                 'z_pose': LaunchConfiguration('z_pose'),
             }.items()
         ),
-        # Wait a bit then start Nav2 + Supervisor
+
+        # Delay Nav2: give Gazebo time to spawn TF and topics
         TimerAction(period=5.0, actions=[OpaqueFunction(function=_include_nav2_with_valid_map)]),
-        # Start RViz a bit after Nav2
+
+        # Delay RViz slightly after Nav2 so display has data
         TimerAction(period=7.0, actions=[rviz]),
     ])
