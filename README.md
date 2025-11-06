@@ -1,14 +1,14 @@
 # TurtleBot3 Supervised Navigation (ROS 2 Humble)
 
-A safety supervisor for TurtleBot3 that intercepts `/cmd_vel` from Nav2, enforces slow/stop rules, and performs deterministic unblocking when obstacles persist in close proximity (3s timer → rotate → nudge forward/back → resume).
+A safety supervisor for TurtleBot3 that intercepts `/cmd_vel` from Nav2, enforces slow/stop rules, and performs deterministic unblocking when obstacles persist in close proximity (3s timer → rotate → resume).
 
 ---
 
 ## Features
 - **Gradual slowdown** near obstacles.
-- **Blocked recovery**: Rotate + nudge routine after 3s.
+- **Blocked recovery**: Rotate routine after 3s.
 - **Minimal dependencies**: Uses `/scan` and `/cmd_vel_raw`.
-- **FSM**: PASS → SLOW → BLOCKED_WAIT → UNBLOCK_ROTATE → NUDGE_FORWARD → NUDGE_BACK → PASS.
+- **FSM**: PASS → SLOW → BLOCKED_WAIT → UNBLOCK_ROTATE → PASS.
 
 ---
 
